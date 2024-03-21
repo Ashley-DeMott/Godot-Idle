@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxmp32x0prn7g"]
+
+[ext_resource type="Script" path="res://Item.gd" id="1_42wb7"]
+[ext_resource type="Texture2D" uid="uid://cqhecem0fp2vn" path="res://art/coin.png" id="2_rmxw7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ax0qy"]
+size = Vector2(10, 16)
+
+[node name="Item" type="RigidBody2D" groups=["items", "spawnItems"]]
+gravity_scale = 0.0
+script = ExtResource("1_42wb7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_rmxw7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ax0qy")

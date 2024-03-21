@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckq3wncsdoxm6"]
+
+[ext_resource type="PackedScene" uid="uid://bn0evpo7eeo3t" path="res://hud.tscn" id="1_e1m02"]
+[ext_resource type="PackedScene" uid="uid://ece2gud1fhci" path="res://Player.tscn" id="2_n23i8"]
+
+[node name="Main" type="Node"]
+
+[node name="HUD" parent="." instance=ExtResource("1_e1m02")]
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.247059, 0.498039, 0.243137, 1)
+
+[node name="Doomba" parent="." instance=ExtResource("2_n23i8")]
+position = Vector2(367, 326)

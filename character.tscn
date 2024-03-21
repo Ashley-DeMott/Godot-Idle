@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://77n3io54auj8"]
+
+[ext_resource type="Script" path="res://Character.gd" id="1_cgh12"]
+[ext_resource type="Texture2D" uid="uid://15h3o5j1urke" path="res://art/MiniDino_Walk1.png" id="2_e5n3r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ax0qy"]
+size = Vector2(31, 30)
+
+[node name="Character" type="RigidBody2D" groups=["enemies"]]
+gravity_scale = 0.0
+script = ExtResource("1_cgh12")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_e5n3r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_ax0qy")
