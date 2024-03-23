@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ax0qy"]
 size = Vector2(10, 16)
 
-[node name="Item" type="RigidBody2D" groups=["items", "spawnItems"]]
+[node name="Item" type="RigidBody2D" groups=["items"]]
 gravity_scale = 0.0
 script = ExtResource("1_42wb7")
 

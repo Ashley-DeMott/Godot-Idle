@@ -3,7 +3,11 @@ extends Node
 @export var hud: HUD
 @export var player: Player
 @export var enemy_scene: PackedScene
-@export var item_scene: PackedScene
+@export var heart_scene: PackedScene
+@export var coin_scene: PackedScene
+@export var audioPlayer: AudioStreamPlayer2D
+
+@onready var item_scenes = [heart_scene, coin_scene]
 
 # TODO: Limits on scene's enemies and pickups spawned?
 # Max enemies and items that can be spawned
@@ -36,7 +40,10 @@ func _new_game():
 	player._reset_player()
 	_update_HP()
 	
+	audioPlayer.set_stream(load("res://music/squeak.wav"))	
+	
 	# TODO: Delete all enemies/pickups on screen
+	
 
 func _connect_button(buyPanel):
 	""" Connect the buyPanel's button to the correct function """
@@ -50,7 +57,6 @@ func _connect_button(buyPanel):
 	else:
 		pass
 
-
 func _end_game():
 	""" Called when the user clicks 'exit' button """
 	get_tree().quit() # Closes the program
@@ -59,8 +65,12 @@ func _end_game():
 func _process(delta):
 	hud._update_coins(player._get_coins()) # TODO: Move to where coins changes/create signal
 	if Input.is_action_pressed("click"):
+		var mousePos = get_viewport().get_mouse_position()
 		print("Mouse Click at ", get_viewport().get_mouse_position())
-		#get_tree().call_group("enemy", "is_hit")
+		for enemy in get_tree().get_nodes_in_group("enemies"):
+			if enemy._is_hit(mousePos):
+				player._update_coins(enemy._get_value())
+				enemy._delete()
 	
 func _spawn_item_on_path(scene, path):
 	pass
@@ -83,7 +93,7 @@ func _spawn_enemy():
 	# Set the enemy's position to a random location.
 	enemy.position = spawn_location.position
 	
-	# TODO: Target player instead of random
+	# TODO: Target player instead of randomly moving
 
 	# Add some randomness to the direction.
 	direction += randf_range(-PI / 4, PI / 4)
@@ -95,18 +105,16 @@ func _spawn_enemy():
 
 	# Spawn the item by adding it to the Main scene.
 	add_child(enemy)
+	audioPlayer.play()
 	
 func _spawn_pickup():
-	""" Spawns a pickup item on the item path """
-	var item = item_scene.instantiate()
+	""" Spawns a random Item on the item path """
+	var item = item_scenes[(randi() % 2) - 1].instantiate()
 	
-	# TODO: make "path" parameter of _spawn_pickup(), along with item_scene
-	# var node = "" + path + "/Location"
-	
-	# Set the item's position to a random location.
+	# Set the item's position to a random location
 	item.position = get_node("ItemSpawnPath/Location").position
 
-	# Spawn the item by adding it to the Main scene.
+	# Spawn the item by adding it to the Main scene
 	add_child(item)
 
 func _game_over():
@@ -117,7 +125,7 @@ func _game_over():
 	# Disable timers for object spawning
 	$EnemyTimer.stop()
 	$ItemTimer.stop()
-	get_tree().call_group("enemy", "queue_free")
+	get_tree().call_group("enemies", "queue_free")
 	get_tree().call_group("items", "queue_free")
 
 	# Displays the "Game Over" screen

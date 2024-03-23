@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcqs3cdt7vccg"]
+
+[ext_resource type="Texture2D" uid="uid://cpkldqpumcfhd" path="res://art/Heart.png" id="1_kaqe5"]
+[ext_resource type="Script" path="res://heart.gd" id="1_t1tlp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82vwk"]
+size = Vector2(20, 17)
+
+[node name="heart" type="RigidBody2D" groups=["healing", "items"]]
+gravity_scale = 0.0
+script = ExtResource("1_t1tlp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kaqe5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_82vwk")

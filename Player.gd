@@ -57,15 +57,18 @@ func _get_player_input(velocity):
 func _on_body_entered(body):
 	""" Called when the Player's collision box is entered by a body """
 	
-	# TODO: Change to specify coins (after adding more pickup/item types)
+	# If an Item collides with the Player
 	if(body.is_in_group("items")):
-		coins += body._get_points()
-		body._player_hit() # Tell the other body is was hit, destroys self
-	
+		if(body.is_in_group("coins")):
+			coins += body._get_value()
+		elif (body.is_in_group("healing")):
+			_update_HP(body._get_value())
+		body._delete() # The Item was collected, delete from game
+			
 	# TODO: Could specify enemy types (enemyB adds knockback, enemyC gives 'paralysis' effect)
 	elif(body.is_in_group("enemies")):
-		_update_HP(-1 * body._get_points())
-		body._player_hit() # Tell the other body is was hit, destroys self
+		_update_HP(-1 * body._get_value())
+		body._delete()
 
 func _get_coins():
 	""" Get the number of coins the Player has """
@@ -86,6 +89,8 @@ func _update_HP(change):
 	health += change
 	if health < 0:
 		health = 0 # Don't show negative values
+	elif health > maxHP:
+		health = maxHP # Don't go over max
 	HPChange.emit()
 
 func _set_max_HP(newMax):

@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://ckq3wncsdoxm6"]
+[gd_scene load_steps=10 format=3 uid="uid://ckq3wncsdoxm6"]
 
 [ext_resource type="PackedScene" uid="uid://bn0evpo7eeo3t" path="res://hud.tscn" id="1_e1m02"]
 [ext_resource type="Script" path="res://main.gd" id="1_yjopq"]
 [ext_resource type="PackedScene" uid="uid://bs8dx8luh027l" path="res://enemy.tscn" id="2_4ll66"]
 [ext_resource type="PackedScene" uid="uid://ece2gud1fhci" path="res://Player.tscn" id="2_n23i8"]
-[ext_resource type="PackedScene" uid="uid://dcqs3cdt7vccg" path="res://heart.tscn" id="3_iym65"]
-[ext_resource type="PackedScene" uid="uid://wsxduqml1r6l" path="res://coin.tscn" id="3_ovwnn"]
+[ext_resource type="PackedScene" uid="uid://cxmp32x0prn7g" path="res://Item.tscn" id="3_o756h"]
 [ext_resource type="Script" path="res://SpawnPath.gd" id="6_iv1nn"]
 
 [sub_resource type="Curve2D" id="Curve2D_w00xy"]
@@ -27,8 +26,7 @@ script = ExtResource("1_yjopq")
 hud = NodePath("HUD")
 player = NodePath("Doomba")
 enemy_scene = ExtResource("2_4ll66")
-heart_scene = ExtResource("3_iym65")
-coin_scene = ExtResource("3_ovwnn")
+item_scene = ExtResource("3_o756h")
 audioPlayer = NodePath("EnemySpawnPath/Location/AudioStreamPlayer2D")
 
 [node name="HUD" parent="." instance=ExtResource("1_e1m02")]

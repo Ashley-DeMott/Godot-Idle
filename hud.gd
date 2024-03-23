@@ -44,11 +44,13 @@ func _update_health(currentHP, maxHP):
 	""" Update the HP bar """
 	numHP.text = str(currentHP) + " / " + str(maxHP)
 	
-	# TODO: Set HP's width to ratio of current ot maxHP
-	# width of HP is HPBar's width * current/maxHP
-	var scale = float(currentHP) / float(maxHP)
-	if scale < 1:
+	# Scale the healthbar to the ratio of currentHP/maxHP
+	if currentHP == maxHP:
+		HP.set_size(HPBar.get_size())
+	else:
+		var scale = float(currentHP) / float(maxHP)
 		HP.set_size(Vector2(HPBar.get_size().x * scale, HPBar.get_size().y))
+		
 
 func _toggle_game_over():
 	""" Toggle the visibility of the 'Game Over' window """
