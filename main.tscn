@@ -57,5 +57,8 @@ rotation = -3.1091
 [node name="ItemTimer" type="Timer" parent="."]
 wait_time = 1.5
 
+[connection signal="endGame" from="HUD" to="." method="_end_game"]
+[connection signal="startGame" from="HUD" to="." method="_new_game"]
+[connection signal="HPChange" from="Doomba" to="." method="_update_HP"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_spawn_enemy"]
 [connection signal="timeout" from="ItemTimer" to="." method="_spawn_pickup"]

@@ -1,20 +1,21 @@
 class_name BuyPanel extends Control
 
-var buyName
-var price
-var button
+@export var buyName: Label
+@export var button : Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	buyName = $Label
-	button = $Button
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-func _set_text(t):
-	buyName.text = t
-
-func _set_button(price):
-	button.text = price
+func _set_text(name, price):
+	"""Fill in the BuyPanel with the given name and price"""
+	buyName.text = name
+	button.text = str(price)
+	
+func _activate_button():
+	"""The button is active if the """
+	button.disabled = !button.disabled
