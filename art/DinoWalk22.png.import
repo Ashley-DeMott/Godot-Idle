@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boknas18ksh3l"
-path="res://.godot/imported/MiniDino_Stand.png-6c72497a5fa7c997add9df6eba03d3dc.ctex"
+uid="uid://c2cplhkyyygli"
+path="res://.godot/imported/DinoWalk22.png-f4e135ef1aebe805dd0313e6ed962a80.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/MiniDino_Stand.png"
-dest_files=["res://.godot/imported/MiniDino_Stand.png-6c72497a5fa7c997add9df6eba03d3dc.ctex"]
+source_file="res://art/DinoWalk22.png"
+dest_files=["res://.godot/imported/DinoWalk22.png-f4e135ef1aebe805dd0313e6ed962a80.ctex"]
 
 [params]
 

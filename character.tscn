@@ -1,7 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://77n3io54auj8"]
+[gd_scene load_steps=8 format=3 uid="uid://77n3io54auj8"]
 
 [ext_resource type="Script" path="res://Character.gd" id="1_cgh12"]
 [ext_resource type="Texture2D" uid="uid://15h3o5j1urke" path="res://art/MiniDino_Walk1.png" id="2_e5n3r"]
+[ext_resource type="Texture2D" uid="uid://3e00jqpelxvs" path="res://art/MiniDino_Stand2.png" id="4_krmoj"]
+[ext_resource type="Texture2D" uid="uid://c2cplhkyyygli" path="res://art/DinoWalk22.png" id="5_e7t1k"]
+[ext_resource type="Texture2D" uid="uid://bywfggc6aiv77" path="res://art/MiniDino_Stand1.png" id="6_kr1k7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n614y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_kr1k7")
+}],
+"loop": true,
+"name": &"stand",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_e5n3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_krmoj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_e7t1k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kr1k7")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 4.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ax0qy"]
 size = Vector2(31, 30)
@@ -10,9 +41,18 @@ size = Vector2(31, 30)
 gravity_scale = 0.0
 script = ExtResource("1_cgh12")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_e5n3r")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n614y")
+animation = &"walking"
+frame = 2
+frame_progress = 0.417047
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_ax0qy")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-0.500001, -1)
+scale = Vector2(1.55, 1.5)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

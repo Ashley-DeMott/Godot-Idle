@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bs8dx8luh027l"]
 
 [ext_resource type="PackedScene" uid="uid://77n3io54auj8" path="res://character.tscn" id="1_45cpa"]
-[ext_resource type="Script" path="res://Enemy.gd" id="2_pub0a"]
+[ext_resource type="Script" path="res://miniDino.gd" id="2_36oku"]
 
-[node name="Enemy" groups=["enemies", "spawnItems"] instance=ExtResource("1_45cpa")]
-script = ExtResource("2_pub0a")
+[node name="Enemy" groups=["spawnItems"] instance=ExtResource("1_45cpa")]
+script = ExtResource("2_36oku")

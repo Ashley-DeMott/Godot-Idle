@@ -57,44 +57,57 @@ func _end_game():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	hud._update_score(player._get_coins()) # TODO: Move to where coins changes/create signal
+	hud._update_coins(player._get_coins()) # TODO: Move to where coins changes/create signal
+	if Input.is_action_pressed("click"):
+		print("Mouse Click at ", get_viewport().get_mouse_position())
+		#get_tree().call_group("enemy", "is_hit")
 	
-# TODO: Path doesn't seem to move, check path spawning
 func _spawn_item_on_path(scene, path):
-	var item = scene.instantiate()
-	
-	var node = "" + path + "/Location"
-	
-	# Get the location from the path
-	var spawn_location = get_node(node)
-	
-	# Set the item's direction perpendicular to the path direction.
-	var direction = spawn_location.rotation + PI / 2
-
-	# Set the item's position to a random location.
-	item.position = spawn_location.position
-
-	# Add some randomness to the direction.
-	direction += randf_range(-PI / 4, PI / 4)
-	item.rotation = direction
-
-	# Choose the velocity for the item.
-	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
-	item.linear_velocity = velocity.rotated(direction)
-
-	# Spawn the item by adding it to the Main scene.
-	add_child(item)
+	pass
 
 func _spawn_enemy():
 	""" Spawns an enemy on the enemy path """
-	#var enemy_spawn = $EnemySpawnPath/Location
-	_spawn_item_on_path(enemy_scene, "EnemySpawnPath")	
+	var enemy = enemy_scene.instantiate()
+	
+	# TODO: Create a decorator version of object spawning
+	# Steps: create, set rotation, set velocity, set exist time, etc
+	# Ex: A pickup does not need to be rotated/given velocity, but a projectile/bullet would be given all
+	#var node = "" + "EnemySpawnPath" + "/Location"
+	
+	# Get the location from the path
+	var spawn_location = get_node("EnemySpawnPath/Location")
+	
+	# Set the enemy's direction perpendicular to the path direction.
+	var direction = spawn_location.rotation + PI / 2
+
+	# Set the enemy's position to a random location.
+	enemy.position = spawn_location.position
+	
+	# TODO: Target player instead of random
+
+	# Add some randomness to the direction.
+	direction += randf_range(-PI / 4, PI / 4)
+	#enemy.rotation = direction
+
+	# Choose the velocity for the enemy.
+	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
+	enemy.linear_velocity = velocity.rotated(direction)
+
+	# Spawn the item by adding it to the Main scene.
+	add_child(enemy)
 	
 func _spawn_pickup():
 	""" Spawns a pickup item on the item path """
-	#var item = item_scene.instantiate()	
-	#var item_spawn = $ItemSpawnPath/ItemSpawnLocation
-	_spawn_item_on_path(item_scene, "ItemSpawnPath")
+	var item = item_scene.instantiate()
+	
+	# TODO: make "path" parameter of _spawn_pickup(), along with item_scene
+	# var node = "" + path + "/Location"
+	
+	# Set the item's position to a random location.
+	item.position = get_node("ItemSpawnPath/Location").position
+
+	# Spawn the item by adding it to the Main scene.
+	add_child(item)
 
 func _game_over():
 	""" Ends the game """
@@ -104,7 +117,9 @@ func _game_over():
 	# Disable timers for object spawning
 	$EnemyTimer.stop()
 	$ItemTimer.stop()
-	
+	get_tree().call_group("enemy", "queue_free")
+	get_tree().call_group("items", "queue_free")
+
 	# Displays the "Game Over" screen
 	hud._toggle_game_over()
 
