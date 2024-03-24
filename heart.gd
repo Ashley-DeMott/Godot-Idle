@@ -1,4 +1,4 @@
-class_name Heart extends Item
+class_name Heart extends Item # Class Heart inherits functionality from Item
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

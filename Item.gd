@@ -26,8 +26,11 @@ func _on_body_entered(body):
 	
 	# Must be deferred as we can't change physics properties on a physics callback.
 	$CollisionShape2D.set_deferred("disabled", true)
-	
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	""" If the Item is no longer visible on screen """
+	queue_free() # Delete the Item
+
 func _delete():
 	""" Called to remove the Item """
 	queue_free() # Delete the Item
-

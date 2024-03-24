@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7wehhuc0vwte"]
+
+[ext_resource type="PackedScene" uid="uid://ece2gud1fhci" path="res://Player.tscn" id="1_hxgoh"]
+[ext_resource type="Script" path="res://SpawnPath.gd" id="2_y7j28"]
+[ext_resource type="Texture2D" uid="uid://cpkldqpumcfhd" path="res://art/Heart.png" id="3_t7tio"]
+
+[sub_resource type="Curve2D" id="Curve2D_nuylw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jh6j5"]
+
+[node name="Doomba" instance=ExtResource("1_hxgoh")]
+
+[node name="Sword Spiral" type="Path2D" parent="." index="2"]
+curve = SubResource("Curve2D_nuylw")
+script = ExtResource("2_y7j28")
+
+[node name="Location" type="PathFollow2D" parent="Sword Spiral" index="0"]
+position = Vector2(41, -1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sword Spiral/Location" index="0"]
+texture = ExtResource("3_t7tio")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Sword Spiral/Location" index="1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword Spiral/Location/RigidBody2D" index="0"]
+shape = SubResource("RectangleShape2D_jh6j5")

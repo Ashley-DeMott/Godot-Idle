@@ -1,18 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://ece2gud1fhci"]
 
-[ext_resource type="Texture2D" uid="uid://bfu7umpca5wch" path="res://art/DoombaDoodle.png" id="1_b4k06"]
 [ext_resource type="Script" path="res://Player.gd" id="1_vvv51"]
+[ext_resource type="Texture2D" uid="uid://cybfaeet6s0s5" path="res://art/Person.png" id="2_5s12d"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xcijq"]
-radius = 14.0357
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aflku"]
+size = Vector2(29.5, 31.5)
 
 [node name="Doomba" type="Area2D"]
+scale = Vector2(2, 2)
 script = ExtResource("1_vvv51")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_b4k06")
+texture = ExtResource("2_5s12d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_xcijq")
+position = Vector2(1.25, 0.75)
+shape = SubResource("RectangleShape2D_aflku")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

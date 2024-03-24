@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ckq3wncsdoxm6"]
+[gd_scene load_steps=12 format=3 uid="uid://ckq3wncsdoxm6"]
 
 [ext_resource type="PackedScene" uid="uid://bn0evpo7eeo3t" path="res://hud.tscn" id="1_e1m02"]
 [ext_resource type="Script" path="res://main.gd" id="1_yjopq"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dcqs3cdt7vccg" path="res://heart.tscn" id="3_iym65"]
 [ext_resource type="PackedScene" uid="uid://wsxduqml1r6l" path="res://coin.tscn" id="3_ovwnn"]
 [ext_resource type="Script" path="res://SpawnPath.gd" id="6_iv1nn"]
+[ext_resource type="PackedScene" uid="uid://c7wehhuc0vwte" path="res://PlayerWithUpgrades.tscn" id="8_rjx44"]
 
 [sub_resource type="Curve2D" id="Curve2D_w00xy"]
 _data = {
@@ -22,14 +23,14 @@ _data = {
 }
 point_count = 8
 
-[node name="Main" type="Node" node_paths=PackedStringArray("hud", "player", "audioPlayer")]
+[node name="Main" type="Node" node_paths=PackedStringArray("hud", "enemySound", "player")]
 script = ExtResource("1_yjopq")
 hud = NodePath("HUD")
+enemySound = NodePath("EnemySpawnPath/Location/AudioStreamPlayer2D")
 player = NodePath("Doomba")
 enemy_scene = ExtResource("2_4ll66")
 heart_scene = ExtResource("3_iym65")
 coin_scene = ExtResource("3_ovwnn")
-audioPlayer = NodePath("EnemySpawnPath/Location/AudioStreamPlayer2D")
 
 [node name="HUD" parent="." instance=ExtResource("1_e1m02")]
 
@@ -60,17 +61,22 @@ stream = SubResource("AudioStreamWAV_5jxjd")
 [node name="ItemSpawnPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_8flnp")
 script = ExtResource("6_iv1nn")
-random = true
 
 [node name="Location" type="PathFollow2D" parent="ItemSpawnPath"]
 position = Vector2(774, 145)
 rotation = -3.1091
 
 [node name="EnemyTimer" type="Timer" parent="."]
+wait_time = 3.0
 
 [node name="ItemTimer" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 4.0
 
+[node name="Doomba2" parent="." instance=ExtResource("8_rjx44")]
+visible = false
+scale = Vector2(1, 1)
+
+[connection signal="freeze" from="." to="Doomba" method="_on_main_freeze"]
 [connection signal="endGame" from="HUD" to="." method="_end_game"]
 [connection signal="startGame" from="HUD" to="." method="_new_game"]
 [connection signal="HPChange" from="Doomba" to="." method="_update_HP"]
