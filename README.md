@@ -3,7 +3,7 @@
 Made entirely within Godot Engine, this game allows the player to purchase upgrades as they gather coins from the ground or enemies they defeat. It uses both keyboard and mouse controls, challenging the user to collect pickups, avoid enemies, and defeat them all at the same time.
 Godot engine is lightwieght, booting much faster than other popular game engines such as Unity and Unreal. The program has their own scripting language, GDScript, which is similar to Python. I can see Godot being a useful engine that I can use to create additional games with.
 
-![Mini Dino](art/MiniDino_Stand1.png?raw=true)[Demo Video](TBD)
+![Mini Dino](art/MiniDino_Stand1.png?raw=true)[Demo Video](https://youtu.be/d2ShVeRKD-o)
 
 ## Development Evnironment
 * Godot Engine version 4.2.1
