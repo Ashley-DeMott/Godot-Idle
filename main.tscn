@@ -23,10 +23,11 @@ _data = {
 }
 point_count = 8
 
-[node name="Main" type="Node" node_paths=PackedStringArray("hud", "enemySound", "player")]
+[node name="Main" type="Node" node_paths=PackedStringArray("hud", "enemySound", "gameSound", "player")]
 script = ExtResource("1_yjopq")
 hud = NodePath("HUD")
-enemySound = NodePath("EnemySpawnPath/Location/AudioStreamPlayer2D")
+enemySound = NodePath("EnemySpawnPath/Location/EnemySpawnSound")
+gameSound = NodePath("Doomba/PlayerAudio")
 player = NodePath("Doomba")
 enemy_scene = ExtResource("2_4ll66")
 heart_scene = ExtResource("3_iym65")
@@ -45,6 +46,10 @@ color = Color(0.247059, 0.498039, 0.243137, 1)
 [node name="Doomba" parent="." instance=ExtResource("2_n23i8")]
 position = Vector2(367, 326)
 
+[node name="PlayerAudio" type="AudioStreamPlayer2D" parent="Doomba"]
+position = Vector2(-183.5, -163)
+scale = Vector2(0.5, 0.5)
+
 [node name="EnemySpawnPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_w00xy")
 script = ExtResource("6_iv1nn")
@@ -53,7 +58,7 @@ script = ExtResource("6_iv1nn")
 position = Vector2(779, 32)
 rotation = 0.26212
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="EnemySpawnPath/Location"]
+[node name="EnemySpawnSound" type="AudioStreamPlayer2D" parent="EnemySpawnPath/Location"]
 position = Vector2(-760.684, 170.954)
 rotation = -0.26212
 stream = SubResource("AudioStreamWAV_5jxjd")

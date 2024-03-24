@@ -6,7 +6,8 @@ var gameOver = false
 
 # @export allows nodes to be specified inside the editor
 @export var hud: HUD # The UI that displays health, coins, and upgrades menu
-@export var enemySound: AudioStreamPlayer2D # For playing sound effects, specifically enemy spawns
+@export var enemySound: AudioStreamPlayer2D # For playing sound effects from Enemy Spawn location
+@export var gameSound: AudioStreamPlayer2D # For playing sounds by the Player
 
 # The Player that can be controlled through wasd and arrow keys
 @export var player: Player
@@ -41,6 +42,10 @@ var upgrades
 func _ready():
 	""" Start a new game and load upgrades when the scene is created """	
 	_load_upgrades()
+	
+	# Set the "Enemy Spawn" sound
+	enemySound.set_stream(load("res://music/squeak.wav"))	
+	
 	_new_game()
 	
 func _load_upgrades():
@@ -89,9 +94,6 @@ func _new_game():
 	# Reset the Player's stats abd update the HP display
 	player._reset_player()
 	_update_HP()
-	
-	# Set the "Enemy Spawn" sound
-	enemySound.set_stream(load("res://music/squeak.wav"))	
 	
 	_remove_items()
 	gameOver = false
@@ -218,6 +220,9 @@ func _purchase_upgrade(upgradeName):
 	if _can_purchase(upgrade):
 		player._update_coins(-1 * upgrade["price"])
 		# TODO: update upgrade's level/price for next purchase
+		gameSound.set_stream(load("res://music/click.wav"))	
+		gameSound.play()
+		
 		return true
 	else: 
 		return false
