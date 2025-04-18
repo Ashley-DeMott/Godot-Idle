@@ -17,9 +17,9 @@ Godot engine is lightwieght, booting much faster than other popular game engines
 * [Godot Forum](https://forum.godotengine.org/)
 
 ## Future Work
-* Level system with exp gains
-* Unlocking upgrades based on level/exp amount
-* Additional types of upgrades
-* Additional types of enemies
-* Addiional sound effects and music
-* Saving user progress
+* Leveling system with xp gained from defeating enemies
+* Unlock upgrades based on level/exp amount
+* Additional types of upgrades/attacks
+* Additional types of enemies with different movements and attack types
+* Additional sound effects and music
+* Saving and loading user progress to/from a local file
